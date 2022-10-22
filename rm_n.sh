@@ -1,9 +1,11 @@
 #!/bin/bash
 
+dir=$1
+file=$2
 
-if [[ $# -ne 2 ]]; then
-    echo "usage: $0 <dir> <n>" 1>&2
-    exit 0
-fi
-
-find $1 -size +$2c -exec rm {} ";" -print
+function rm_n {
+    cnt=$(find ./$dir -type 'f' -size -$file | wc -l)
+    find ./$dir -type 'f' -size -${file_size}c -delete
+    echo $cnt "files deleted" 1>&2
+}
+rm_n $dir $file
